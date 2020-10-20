@@ -1,0 +1,104 @@
+/*
+ * @Author       : tongzonghua
+ * @Date         : 2020-05-26 21:08:35
+ * @LastEditors  : tongzonghua
+ * @LastEditTime : 2020-10-21 03:01:54
+ * @Email        : tongzonghua@360.cn
+ * @Description  : 样式混入
+ * @FilePath     : /cli/aggna-electron-template/src/renderer/assets/styles/mixins.less
+ */
+
+.font_color(@color) when (iscolor(@color)) {
+  color: @color
+}
+
+.font_color(@color) when (not(iscolor(@color))) {
+  @font-color: "color-@{color}";
+  color      : @@font-color;
+}
+
+.text(@type) {
+  @font-size  : "@{type}-font-size";
+  font-size   : @@font-size;
+  @line-height: "@{type}-line-height";
+  line-height : @@line-height;
+}
+
+.text(@type, @color, @weight: 'regular') {
+  @font-weight: "@{weight}-weight";
+  font-weight : @@font-weight;
+  .text(@type);
+  .font_color(@color)
+}
+
+.text_bg(@active-color, @type, @color, @weight: 'regular') {
+  cursor: pointer;
+  .text(@type, @color, @weight);
+
+  &:hover,
+  &:active {
+    .text(@type, @active-color, @weight);
+  }
+}
+
+.text-ellipsis() {
+  overflow     : hidden;
+  text-overflow: ellipsis;
+  white-space  : nowrap;
+}
+
+.flex-center {
+  display        : inline-flex;
+  justify-content: center;
+  align-items    : center;
+}
+
+.text-ellipsis(@font-type; @lines: 1) {
+  display           : block;
+  /* Fallback for non-webkit */
+  display           : -webkit-box;
+  @font-size        : "@{font-type}-font-size";
+  @line-height      : "@{font-type}-line-height";
+  max-height        : @@line-height*@lines;
+  /* Fallback for non-webkit */
+  font-size         : @@font-size;
+  line-height       : @@line-height;
+  -webkit-line-clamp: @lines;
+  -webkit-box-orient: vertical;
+  overflow          : hidden;
+  text-overflow     : ellipsis;
+
+  @-moz-document url-prefix() {
+    & {
+      position: relative;
+      overflow: hidden;
+    }
+
+    &:before {
+      bottom     : 0;
+      position   : absolute;
+      right      : 0;
+      float      : right;
+      content    : '\2026';
+      margin-left: -3rem;
+      width      : 3rem;
+    }
+
+    &:after {
+      content : '';
+      position: absolute;
+      height  : 50px;
+      width   : 100%;
+      z-index : 1;
+    }
+  }
+}
+
+.hover-effect() {
+  border-radius: @base-border-radius;
+  transition   : all .3s;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}

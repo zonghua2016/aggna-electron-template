@@ -1,4 +1,13 @@
-# qpic
+<!--
+ * @Author       : tongzonghua
+ * @Date         : 2020-10-20 23:19:42
+ * @LastEditors  : tongzonghua
+ * @LastEditTime : 2020-10-21 03:13:00
+ * @Email        : tongzonghua@360.cn
+ * @Description  : 
+ * @FilePath     : /cli/aggna-electron-template/README.md
+-->
+# aggna-electron-template
 
 > An electron-vue project
 
